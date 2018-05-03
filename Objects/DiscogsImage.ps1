@@ -4,7 +4,7 @@ class DiscogsImage {
     [int]$Width
     [string]$ResourceURL
     [DiscogsImageType]$Type
-    [string]$URI150
+    [string]$URI150 #ThumbNail
 
     #Constructor
     DiscogsImage([string]$uri, [int]$height, [int]$width, [string]$resurl, [DiscogsImageType]$imgtype, [string]$uri150) {

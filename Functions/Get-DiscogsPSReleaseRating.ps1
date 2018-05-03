@@ -1,6 +1,9 @@
 #API Pattern
 #https://api.discogs.com/releases/{release_id}/rating
 
+# Load Helper Fucntions
+. $PSScriptRoot\HelperFunctions\Convert-URIArguments.ps1
+. $PSScriptRoot\HelperFunctions\Add-URIArgouments.ps1
 
 function Get-DiscogsPSReleaseRating {
     [CmdletBinding()]
@@ -23,27 +26,11 @@ function Get-DiscogsPSReleaseRating {
             throw "No Release ID specified, please specify via '-ReleaseID' specifiying a valid release id."
         }
 
-        if ($token.trim() -ne $null) {
-            $argument = 'token=' + $token.trim()
-            $URIargs += $argument
-            Write-Verbose -Message "Adding URL argument: $argument"
+        if ($token.trim() -ne '') {
+            $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()
         }
 
-        if ($URIargs.Count -ge 1) {
-            $StringToAppend = ''
-            for ($i = 0; $i -lt $URIargs.Count; $i++) {
-                if ($i -eq 0) {
-                    #First Loop
-                    $StringToAppend = $StringToAppend + '?' + $URIargs[$i]
-                } else {
-                    #Normal loop
-                    $StringToAppend = $StringToAppend + '&' + $URIargs[$i]
-                }
-            }
-            $uri = $uri + $StringToAppend
-            Write-Verbose -Message "URL Arguments: $StringToAppend"
-        }
-        Write-Verbose -Message "Full URL: $uri"
+        $URI = Convert-URIArguments -URI $URI -URIArgs $URIargs
     }
 
     process {

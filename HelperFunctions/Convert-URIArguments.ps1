@@ -1,6 +1,7 @@
 
-function Parse-URIArguments {
+function Convert-URIArguments {
     [CmdletBinding()]
+    [OutputType([string])]
     param (
         # Use Artist ID
         [Parameter(Position=0, Mandatory=$true)][string]$URI,
@@ -8,7 +9,7 @@ function Parse-URIArguments {
     )
 
     if ($URIArgs.Count -ge 1) {
-        Write-Verbose -Message $("URL Arguments: " + $URIArgs.Count.ToString())
+        Write-Verbose -Message $("URI Arguments: " + $URIArgs.Count.ToString())
         $StringToAppend = ''
         for ($i = 0; $i -lt $URIargs.Count; $i++) {
             if ($i -eq 0) {
@@ -21,5 +22,7 @@ function Parse-URIArguments {
         }
         $uri = $uri + $StringToAppend
     }
-    Write-Verbose -Message "Full URL: $uri"
+    Write-Verbose -Message "Full URI: $uri"
+
+    return $uri
 }

@@ -35,9 +35,9 @@ Update-MarkdownHelp .\docs
 2. Add More Commands
 3. Add Examples to Readme.md
 4. Write-out the docs for each command
-5. Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the markdown page
+5. Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere, could do this using github
 6. Add `[OutputType([<Type>])]`
-7. Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with New-Object Statments for Better Visability
+7. Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with New-Object commands.
 5. Push to Github
 
 ### Individual Commands
@@ -49,7 +49,7 @@ Update-MarkdownHelp .\docs
     1. Add Intelligent Error handeling as per API Docs
 - `Get-DiscogsPSRelease`
     1. Add Intelligent Error handeling as per API Docs
-    2. Replace the switch statement and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]`         [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)
+    2. Replace the switch statement and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]` [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)
     3. Implement a DiscogsRelease object to return
 - `Search-DiscogsPSDatabase`
     1. Add Intelligent Error handeling as per API Docs

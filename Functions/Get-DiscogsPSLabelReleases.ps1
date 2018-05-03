@@ -1,7 +1,5 @@
-#API Pattern
-#https://api.discogs.com/artists/{artist_id}/releases{?sort,sort_order}
-
-# Include the relevant Objects
+# API Format:
+# https://api.discogs.com/labels/{label_id}/releases{?page,per_page}
 
 # Develoment Only
 # Load Helper Fucntions
@@ -10,48 +8,29 @@
 
 #Load Needed Objects
 . .\Objects\DiscogsPaging.ps1
-. .\Objects\DiscogsArtistMember.ps1
-. .\Objects\DiscogsImage.ps1
-. .\Objects\DiscogsArtist.ps1
 
-
-function Get-DiscogsPSArtistReleases {
+function Get-DiscogsPSLabelReleases {
     [CmdletBinding()]
     param (
-        # Use Artist ID
-        [Parameter(Position=0, Mandatory=$false)][alias("ID")][int]$ArtistID,
-        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true)][DiscogsArtist]$FromArtist,
-        [Parameter(Mandatory=$false)][string]$Token,
-        [Parameter(Mandatory=$false)][ValidateSet("year", "title", "format")][string]$SortBy,
-        [Parameter(Mandatory=$false)][ValidateSet("asc", "desc")][string]$SortOrder
+        [Parameter(Position=0, Mandatory=$true, HelpMessage='Enter a valid Label id number.')] [alias("ID")] [int]$LabelID,
+
+        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')][string]$Token
     )
 
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/artists/{artist_id}/releases'
-        if ($ArtistID -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $ArtistID.ToString())
-            Write-Verbose -Message "Artist ID: $ArtistID"
-        } elseif ($FromArtist -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $FromArtist.id.ToString())
-            $temp = $FromArtist.id
-            Write-Verbose -Message "Artist ID: $temp"
+        $uri = 'https://api.discogs.com/labels/{label_id}/releases'
+        if ($LabelID -ne $null) {
+            $uri = $uri.Replace('{label_id}', $LabelID.ToString())
+            Write-Verbose -Message "Label ID: $LabelID"
         } else {
-            throw "No Artist Specified Please specify via '-ArtistID' specifiying a valid artist id number or '-FromArtist' Specifying an DiscogsArtist Object"
+            throw "No Label ID Specified Please specify via '-LabelID' specifiying a valid Label ID"
         }
-
 
         if ($token.trim() -ne '') {
             $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()
         }
-        if ($SortBy.trim() -ne '') {
-            $URIargs += Add-URIArgument -Key 'sort' -Value $SortBy.trim()
-        }
-        if ($SortOrder.trim() -ne '') {
-            $URIargs += Add-URIArgument -Key 'sort_order' -Value $SortOrder.trim()
-        }
-
         #return 100 items per request
         $URIargs += Add-URIArgument -Key 'per_page' -Value '100'
         #Ensure we are at Page 1
@@ -61,16 +40,15 @@ function Get-DiscogsPSArtistReleases {
     }
 
     process {
+        # Initial Request for Page 1
         try {
             Write-Verbose -Message "Getting Page: 1"
             $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
-            #Thow Error
-            #TODO: Add Error handeling for each response as per the API Docs
+            # Thow Error
             throw $_
         }
-
         $temp = $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
         [DiscogsPaging]$Paging = New-Object -TypeName DiscogsPaging -ArgumentList @($temp)
 
@@ -81,7 +59,7 @@ function Get-DiscogsPSArtistReleases {
             $totalPages = $Paging.TotalPages
             $leftToGet = $totalPages - 1
             $totalItemsToGet = $Paging.ItemsTotal
-            Write-Verbose -Message "Total items Left To Get: $totalItemsToGet"
+            Write-Verbose -Message "Totla items Left To Get: $totalItemsToGet"
             Write-Verbose -Message "Getting $totalPages Pages"
             Write-Verbose -Message "Pages left to Get: $leftToGet"
 
@@ -117,7 +95,6 @@ function Get-DiscogsPSArtistReleases {
     }
 
     end {
-        #return [DiscogsArtist]::new($resp.Content)
         return $ObjectsOut
     }
 }

@@ -18,7 +18,7 @@ class DiscogsPaging {
         return $result
     }
 
-    #consructor
+    # Constructor
     DiscogsPaging([string]$JSONSTR) {
         $JSON = $JSONSTR | ConvertFrom-Json
         $This.CurrentPage = $JSON.page
@@ -31,7 +31,7 @@ class DiscogsPaging {
         $This.NextPageURL = $JSON.urls.next
     }
     DiscogsPaging() {
-        #Default
+        # Default
     }
 }
 

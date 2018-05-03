@@ -1,31 +1,31 @@
-#API Pattern
-#https://api.discogs.com/masters/{master_id}
+# API Format:
+# /labels/{label_id}
+
+# Load Helper Fucntions
+. $PSScriptRoot\HelperFunctions\Convert-URIArguments.ps1
+. $PSScriptRoot\HelperFunctions\Add-URIArgouments.ps1
 
 
 function Get-DiscogsPSMaster {
     [CmdletBinding()]
     param (
         # Use Artist ID
-        [Parameter(
-            Position=0,
-            Mandatory=$true,
-            HelpMessage="Enter a valid release master id number."
-            )]
+        [Parameter( Position=0, Mandatory=$true,  HelpMessage='Enter a valid label id number.' )]
         [alias("ID")]
-        [int]$MasterID,
+        [int]$LabelID,
 
-        [Parameter(Position=1, Mandatory=$false, HelpMessage="Enter a valid User token from Discogs.")][string]$Token
+        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')][string]$Token
     )
 
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/masters/{master_id}'
-        if ($MasterID -ne $null) {
-            $uri = $uri.Replace('{master_id}', $MasterID.ToString())
-            Write-Verbose -Message "Master ID: $MasterID"
+        $uri = 'https://api.discogs.com/labels/{label_id}'
+        if ($LabelID -ne $null) {
+            $uri = $uri.Replace('{label_id}', $LabelID.ToString())
+            Write-Verbose -Message "Label ID: $LabelID"
         } else {
-            throw "No Master Release ID Specified Please specify via '-MasterID' specifiying a valid Master Release ID"
+            throw "No Label ID Specified Please specify via '-MasterID' specifiying a valid Label ID"
         }
 
         if ($token.trim() -ne '') {
