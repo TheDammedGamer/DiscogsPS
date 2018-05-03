@@ -1,5 +1,5 @@
 $ModuleManifestName = 'DiscogsPS.psd1'
-$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+$ModuleManifestPath = "$PSScriptRoot\$ModuleManifestName"
 
 Describe 'Module Manifest Tests' {
     It 'Passes Test-ModuleManifest' {

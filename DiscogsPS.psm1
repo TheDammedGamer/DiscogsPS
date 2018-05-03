@@ -1,17 +1,19 @@
 # Implement your module commands in this script.
 
 # Dot Source every file to include it in the module
+
 #### Objects
-. .\Objects\DiscogsArtist.ps1
-. .\Objects\DiscogsArtistMember.ps1
-. .\Objects\DiscogsArtistSub.ps1
-. .\Objects\DiscogsImage.ps1
+. $PSScriptRoot\Objects\DiscogsArtistMember.ps1
+. $PSScriptRoot\Objects\DiscogsArtistSub.ps1
+. $PSScriptRoot\Objects\DiscogsImage.ps1
+. $PSScriptRoot\Objects\DiscogsArtist.ps1
+. $PSScriptRoot\Objects\DiscogsPaging.ps1
 
 ### Functions
-. .\Functions\Get-DiscogsPSArtist.ps1
-. .\Functions\Get-DiscogsPSArtistReleases.ps1
-. .\Functions\Get-DiscogsPSRelease.ps1
-. .\Functions\Search-DiscogsPSDatabase.ps1
+. $PSScriptRoot\Functions\Get-DiscogsPSArtist.ps1
+. $PSScriptRoot\Functions\Get-DiscogsPSArtistReleases.ps1
+. $PSScriptRoot\Functions\Get-DiscogsPSRelease.ps1
+. $PSScriptRoot\Functions\Search-DiscogsPSDatabase.ps1
 
 
 # Export only the functions using PowerShell standard verb-noun naming.

@@ -17,9 +17,9 @@ function Get-DiscogsPSRelease {
         $URIargs = @()
 
         $uri = 'https://api.discogs.com/releases/{release_id}'
-        if ($ArtistID -ne $null) {
+        if ($ReleaseID -ne $null) {
             $uri = $uri.Replace('{release_id}', $ReleaseID.ToString())
-            Write-Verbose -Message "Release URI: $uri"
+            Write-Verbose -Message "Release ID: $ReleaseID"
         } else {
             throw "No Release Specified Please specify via '-ReleaseID' specifiying a valid release id number "
         }
@@ -28,7 +28,7 @@ function Get-DiscogsPSRelease {
         if ($token.trim() -ne $null) {
             $argument = 'token=' + $token.trim()
             $URIargs += $argument
-            Write-Verbose -Message "Adding URI argument: $argument"
+            Write-Verbose -Message "Adding URL argument: $argument"
         }
 
         if ($CurrencyAbbrv.trim().Length -gt 0) {
@@ -36,62 +36,62 @@ function Get-DiscogsPSRelease {
                 'USD' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'GBP' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'EUR' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'CAD' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'AUD' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'JPY' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'CHF' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'MXN' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'BRL' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'NZD' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'SEK' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 'ZAR' {
                     $argument = 'curr_abbr=' + $CurrencyAbbrv.trim().ToUpper()
                     $URIargs += $argument
-                    Write-Verbose -Message "Adding URI argument: $argument"
+                    Write-Verbose -Message "Adding URL argument: $argument"
                 }
                 Default {
                     throw "Currency Abreviation is an incorrect value, the avaliable values are: 'USD', 'GBP', 'EUR', 'CAD', 'AUD', 'JPY', 'CHF', 'MXN', 'BRL', 'NZD', 'SEK' and 'ZAR'. You specified: $sort"
@@ -107,7 +107,7 @@ function Get-DiscogsPSRelease {
                     $StringToAppend = $StringToAppend + '?' + $URIargs[$i]
                 } else {
                     #Normal loop
-                    $StringToAppend = $StringToAppend + '?' + $URIargs[$i]
+                    $StringToAppend = $StringToAppend + '&' + $URIargs[$i]
                 }
             }
 

@@ -1,8 +1,6 @@
 #Database Search URL Pattern
 #https://api.discogs.com/database/search?q={query}&{?type,title,release_title,credit,artist,anv,label,genre,style,country,year,format,catno,barcode,track,submitter,contributor}
 
-#TODO: Check For Pagination and Get All Pages
-
 function Search-DiscogsPSDatabase {
     [CmdletBinding()]
     param (

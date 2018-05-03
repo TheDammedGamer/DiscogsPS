@@ -1,43 +1,44 @@
-
 #API Pattern
-#https://api.discogs.com/artists/{artist_id}
-
-#TODO: Implement $FromArtistMember
+#https://api.discogs.com/releases/{release_id}/rating/{username}
 
 #Include the relevant Objects
 #. $PSScriptRoot\Objects\DiscogsArtist.ps1
 #. $PSScriptRoot\Objects\DiscogsArtistMember.ps1
 
 
-function Get-DiscogsPSArtist {
+function Get-DiscogsPSReleaseRatingByUser {
     [CmdletBinding()]
     param (
         # Use Artist ID
-        [Parameter(Position=0, Mandatory=$false)][int]$ArtistID,
-        [Parameter(Position=1, Mandatory=$false)][string]$Token,
-        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true)][DiscogsArtistMember]$FromArtistMember
+        [Parameter(Position=0, Mandatory=$true)][int]$ReleaseID,
+        [Parameter(Position=1, Mandatory=$true)][string]$DiscogsUsername,
+        [Parameter(Position=2, Mandatory=$false)][string]$Token
     )
 
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/artists/{artist_id}'
-        if ($ArtistID -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $ArtistID.ToString())
-            Write-Verbose -Message "Artist ID: $ArtistID"
-        } elseif ($FromArtistMember -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $FromArtist.ID.ToString())
-            $temp = $FromArtist.ID
-            Write-Verbose -Message "Artist ID: $temp"
+        $uri = 'https://api.discogs.com/releases/{release_id}/rating/{username}'
+
+        if ($ReleaseID -ne $null) {
+            $uri = $uri.Replace('{release_id}', $ReleaseID.ToString())
+            Write-Verbose -Message "Release ID: $ReleaseID"
         } else {
-            throw "No Artist Specified Please specify via '-ArtistID' specifiying a valid artist id number or '-FromArtistMember' Specifying an DiscogsArtistMember Object"
+            throw "No Release ID specified, please specify via '-ReleaseID' specifiying a valid release id."
+        }
+
+        if ($DiscogsUsername -ne $null) {
+            $uri = $uri.Replace('{username}', $DiscogsUsername.ToString())
+            Write-Verbose -Message "Discogs Username: $DiscogsUsername"
+        } else {
+            throw "No Discogs Username specified, please specify via '-DiscogsUsername' specifiying a valid Discogs Username."
         }
 
 
         if ($token.trim() -ne $null) {
             $argument = 'token=' + $token.trim()
             $URIargs += $argument
-            Write-Verbose -Message "Adding URI argument: $argument"
+            Write-Verbose -Message "Adding URL argument: $argument"
         }
 
         if ($URIargs.Count -ge 1) {
@@ -51,10 +52,8 @@ function Get-DiscogsPSArtist {
                     $StringToAppend = $StringToAppend + '&' + $URIargs[$i]
                 }
             }
-
             $uri = $uri + $StringToAppend
             Write-Verbose -Message "URL Arguments: $StringToAppend"
-
         }
         Write-Verbose -Message "Full URL: $uri"
     }
@@ -71,6 +70,7 @@ function Get-DiscogsPSArtist {
     }
 
     end {
-        return [DiscogsArtist]::new($resp.Content)
+        #return [DiscogsArtist]::new($resp.Content)
+        return $resp.Content | ConvertFrom-Json
     }
 }
