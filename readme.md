@@ -1,21 +1,43 @@
 # DiscogsPS Module
 
 Add a Description
-Refernce Taglib sharp as a way to update files with media tags
+Refernce Taglib sharp as a way to update files with media tags e.g. `ID3` for `.mp3` files
 
----
+
 ## Installation
 
+Install from PowerShell gallery.
 
----
+```powershell
+Install-Module DiscogsPS
+```
+
 ## Examples
 
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+```
 
----
+{{ Add example description here }}
+
+### Example 2
+```powershell
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+PS C:\> {{ Add example code here }}
+```
+
+{{ Add example description here }}
+
 ## PowerShell Help Files
 The help documents for this module are created using PlatyPS which converts markdown to PowerShell help files.
 
-The Documentation can be found in the `.\docs` folder.
+The documentation can be found in the `.\docs` folder.
 
 If updating the help files please run the following commands to update the PowerShell help files aswell.
 
@@ -28,32 +50,33 @@ Import-Module .\DiscogsPS.psd1 -Force
 Update-MarkdownHelp .\docs
 ```
 ---
-## To Do
+# Project To Do
 
-### Module Wide
-1. Roll URI arguments into a Generic Function
+## Module Wide
+1. ~~Roll URI arguments into a Generic Functions~~
 2. Add More Commands
 3. Add Examples to Readme.md
-4. Write-out the docs for each command
-5. Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere, could do this using github
+4. Write out the docs for each command
+5. Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere.
+    Probably Github
 6. Add `[OutputType([<Type>])]`
 7. Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with New-Object commands.
 5. Push to Github
 
-### Individual Commands
+## Individual Commands
 - `Get-DiscogsPSArtistReleases`
     1. Add Intelligent Error handeling as per API Docs
-    1. Implement Pagination for the Results of the API Call
+    1. ~~Implement Pagination for the Results of the API Call~~
     2. Add Intelligent Error handeling as per API Docs
 - `Get-DiscogsPSArtist`
     1. Add Intelligent Error handeling as per API Docs
 - `Get-DiscogsPSRelease`
     1. Add Intelligent Error handeling as per API Docs
-    2. Replace the switch statement and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]` [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)
+    2. ~~Replace the switch statements and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]` [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)~~
     3. Implement a DiscogsRelease object to return
 - `Search-DiscogsPSDatabase`
     1. Add Intelligent Error handeling as per API Docs
-    2. Update this command to add URI Handling
+    2. ~~Update this command to add URI Handling~~
     3. Check For Pagination and Get All Pages
 - `Get-DiscogsPSReleaseRating`
     1. Add Intelligent Error handeling as per API Docs
@@ -66,7 +89,7 @@ Update-MarkdownHelp .\docs
 ---
 # License
 
-### MIT License
+## MIT License
 
 Copyright (c) 2018 Liam Townsend
 

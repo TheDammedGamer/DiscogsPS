@@ -1,6 +1,7 @@
 $ModuleName = 'DiscogsPS'
 
-Import-Module platyPS
+
 Import-Module $ModuleName -Force
+Import-Module platyPS
 
 New-MarkdownHelp -Module $ModuleName -OutputFolder .\docs
