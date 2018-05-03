@@ -2,8 +2,8 @@
 # https://api.discogs.com/
 
 # Load Helper Fucntions
-. $PSScriptRoot\HelperFunctions\Convert-URIArguments.ps1
-. $PSScriptRoot\HelperFunctions\Add-URIArgouments.ps1
+. .\HelperFunctions\Convert-URIArguments.ps1
+. .\HelperFunctions\Add-URIArgouments.ps1
 
 function Get-DiscogsPSSomething {
     [CmdletBinding()]

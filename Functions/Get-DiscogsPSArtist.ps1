@@ -8,9 +8,10 @@
 #. $PSScriptRoot\Objects\DiscogsArtist.ps1
 #. $PSScriptRoot\Objects\DiscogsArtistMember.ps1
 
+# Develoment Only
 # Load Helper Fucntions
-. $PSScriptRoot\HelperFunctions\Convert-URIArguments.ps1
-. $PSScriptRoot\HelperFunctions\Add-URIArgouments.ps1
+. .\HelperFunctions\Convert-URIArguments.ps1
+. .\HelperFunctions\Add-URIArguments.ps1
 
 function Get-DiscogsPSArtist {
     [CmdletBinding()]
