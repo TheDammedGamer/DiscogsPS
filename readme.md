@@ -53,7 +53,7 @@ Update-MarkdownHelp .\docs
 # Project To Do
 
 ## Module Wide
-1. [ ] ~~Roll URI arguments into a Generic Functions~~
+1. [x] ~~Roll URI arguments into a Generic Functions~~
 2. [ ] Add More Commands
 3. [ ] Add Examples to Readme.md
 4. [ ] Write out the docs for each command
