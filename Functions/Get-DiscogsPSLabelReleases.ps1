@@ -60,8 +60,7 @@ function Get-DiscogsPSLabelReleases {
             $totalPages = $Paging.TotalPages
             $leftToGet = $totalPages - 1
             $totalItemsToGet = $Paging.ItemsTotal
-            Write-Verbose -Message "Totla items Left To Get: $totalItemsToGet"
-            Write-Verbose -Message "Getting $totalPages Pages"
+            Write-Verbose -Message "Total items Left To Get, $totalItemsToGet From $totalPages Pages"
             Write-Verbose -Message "Pages left to Get: $leftToGet"
 
             # Stats the Resuls of the first Page
