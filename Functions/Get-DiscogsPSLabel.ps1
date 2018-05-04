@@ -9,6 +9,7 @@
 
 function Get-DiscogsPSMaster {
     [CmdletBinding()]
+    [OutputType([HashTable])]
     param (
         # Use Artist ID
         [Parameter( Position=0, Mandatory=$true,  HelpMessage='Enter a valid label id number.' )]

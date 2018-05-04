@@ -8,6 +8,7 @@
 
 function Get-DiscogsPSReleaseRatingByUser {
     [CmdletBinding()]
+    [OutputType([HashTable])]
     param (
         # Use Artist ID
         [Parameter(Position=0, Mandatory=$true)][int]$ReleaseID,

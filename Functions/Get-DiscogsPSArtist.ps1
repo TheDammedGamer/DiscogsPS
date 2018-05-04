@@ -15,6 +15,7 @@
 
 function Get-DiscogsPSArtist {
     [CmdletBinding()]
+    [OutputType([DiscogsArtist])]
     param (
         # Use Artist ID
         [Parameter(Position=0, Mandatory=$false)][int]$ArtistID,

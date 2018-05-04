@@ -11,6 +11,7 @@
 
 function Get-DiscogsPSLabelReleases {
     [CmdletBinding()]
+    [OutputType([HashTable[]])]
     param (
         [Parameter(Position=0, Mandatory=$true, HelpMessage='Enter a valid Label id number.')] [alias("ID")] [int]$LabelID,
 

@@ -1,4 +1,4 @@
-class DiscogsArtistStub {
+class DiscogsPSArtistStub {
     [string]$ThumbNailImageURL
     [string]$Title
     [string]$URIRef

@@ -18,6 +18,7 @@
 
 function Get-DiscogsPSRelease {
     [CmdletBinding()]
+    [OutputType([HashTable])]
     param (
         [Parameter(Position=0, Mandatory=$true)][int]$ReleaseID,
         [Parameter(Position=1, Mandatory=$false)][string]$Token,

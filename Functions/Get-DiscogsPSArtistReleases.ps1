@@ -17,6 +17,7 @@
 
 function Get-DiscogsPSArtistReleases {
     [CmdletBinding()]
+    [OutputType([HashTable])]
     param (
         # Use Artist ID
         [Parameter(Position=0, Mandatory=$false)][alias("ID")][int]$ArtistID,

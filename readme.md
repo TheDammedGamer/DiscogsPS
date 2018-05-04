@@ -59,11 +59,12 @@ Update-MarkdownHelp .\docs
 4. Write out the docs for each command
 5. Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere.
     Probably Github
-6. Add `[OutputType([<Type>])]`
-7. Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with New-Object commands.
-5. Push to Github
+6. Add `[OutputType([<Type>])]` to All Commands
+7. Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with `New-Object` commands.
+8. Push to Github
+9. Store Token in Object for when piping objects trhough
 
-## Individual Commands
+## Commands
 - `Get-DiscogsPSArtistReleases`
     1. Add Intelligent Error handeling as per API Docs
     1. ~~Implement Pagination for the Results of the API Call~~
@@ -84,8 +85,26 @@ Update-MarkdownHelp .\docs
 - `Get-DiscogsPSMaster`
     1. Add Intelligent Error handeling as per API Docs
     2. Implement a DiscogsMaster Objects and return this object
-- `new`
-    1. df
+
+
+## Objects
+- `DiscogsPSMaster`
+    1. Add Video Ref Object `DiscogsPSVideoStub`
+    2. Add Artists Ref Object
+    3. Add Tracklist object
+- `DiscogsPSMasterStub`
+    1. Add Constructor
+- `DiscogsPSArtistStub`
+    1. Add Constructor
+- `DiscogsPSRelease`
+    1. Basic Implementation of Class
+    2. Add Label Ref Object
+    3. Add Community Contribution Object
+    4. Add Artist Ref Object
+    5. Add Formats Object
+    6. Add tracklist object (Could be same from `DiscogsPSMaster` need to check format)
+    7. Add Identifers object
+    8. Figure out JSON object defs for companies and series arrays and then implement them
 ---
 # License
 

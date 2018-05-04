@@ -52,6 +52,6 @@ function Get-DiscogsPSMaster {
 
     end {
         #return [DiscogsArtist]::new($resp.Content)
-        return $resp.Content | ConvertFrom-Josn
+        return $resp.Content | ConvertFrom-Json
     }
 }
