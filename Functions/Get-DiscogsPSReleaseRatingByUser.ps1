@@ -47,9 +47,11 @@ function Get-DiscogsPSReleaseRatingByUser {
             $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
         }
         catch {
-            #Thow Error
-            #TODO: Add Error handeling for each response as per the API Docs
-            throw $_
+            if ($resp.StatusCode -eq 404) {
+                throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
+            } else {
+                throw $_
+            }
         }
     }
 

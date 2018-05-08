@@ -47,10 +47,21 @@ function Search-DiscogsPSDatabase {
             $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
         }
         catch {
-            #Thow Error
-            #TODO: Add Error handeling for each response as per the API Docs
-            throw $_
-            #
+            if ($resp.StatusCode -eq 404) {
+                throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
+            } elseif ($resp.StatusCode -eq 404) {
+                # 500 relates to internal server errors
+                $jsonres =  $resp.Content | ConvertFrom-Json
+                if ($jsonres.message -eq 'Query time exceeded. Please try a simpler query.') {
+                    throw 'Query timeout. Please try a simpler query.'
+                } elseif ($jsonres.message -eq 'An internal server error occurred. (Malformed query?)') {
+                    throw 'Internal Server Error. Possible malformed query.'
+                } else {
+                    throw $_
+                }
+            } else {
+                throw $_
+            }
         }
         $temp = $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
         [DiscogsPaging]$Paging = New-Object -TypeName DiscogsPaging -ArgumentList @($temp)

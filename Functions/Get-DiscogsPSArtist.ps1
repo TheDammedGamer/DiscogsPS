@@ -53,7 +53,14 @@ function Get-DiscogsPSArtist {
         catch {
             #Thow Error
             #TODO: Add Error handling for each response as per the API Docs
-            throw $_
+
+            if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Artist not found.' )) {
+                throw "Artist not found on Discogs."
+            } elseif ($resp.StatusCode -eq 404) {
+                throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
+            } else {
+                throw $_
+            }
         }
     }
 

@@ -47,8 +47,14 @@ function Get-DiscogsPSLabelReleases {
             $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
-            # Thow Error
-            throw $_
+            # Error Handling
+            if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Label not found.' )) {
+                throw "Label not found on Discogs."
+            } elseif ($resp.StatusCode -eq 404) {
+                throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
+            } else {
+                throw $_
+            }
         }
         $temp = $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
         [DiscogsPaging]$Paging = New-Object -TypeName DiscogsPaging -ArgumentList @($temp)
@@ -76,8 +82,14 @@ function Get-DiscogsPSLabelReleases {
                     $PageResp = Invoke-WebRequest -Uri $nextURI -UseBasicParsing -Method GET
                 }
                 catch {
-                    # Thow Error
-                    throw $_
+                    # Error Handling
+                    if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Label not found.' )) {
+                        throw "Label not found on Discogs."
+                    } elseif ($resp.StatusCode -eq 404) {
+                        throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
+                    } else {
+                        throw $_
+                    }
                 }
                 $CurrPagetemp = $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
                 $currentPage = New-Object -TypeName DiscogsPaging -ArgumentList @($CurrPagetemp)
