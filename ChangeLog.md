@@ -1,4 +1,6 @@
 # ChangeLog
 
-## V1.0 - Release
+## **V0.0.1 - Release**
 Inital Release
+- vvb
+- vfb

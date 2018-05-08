@@ -1,11 +1,6 @@
 #API Pattern
 #https://api.discogs.com/releases/{release_id}/rating
 
-# Develoment Only
-# Load Helper Fucntions
-. .\HelperFunctions\Convert-URIArguments.ps1
-. .\HelperFunctions\Add-URIArguments.ps1
-
 function Get-DiscogsPSReleaseRating {
     [CmdletBinding()]
     [OutputType([HashTable])]

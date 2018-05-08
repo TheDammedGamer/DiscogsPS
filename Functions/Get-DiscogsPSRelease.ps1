@@ -4,17 +4,6 @@
 #curr_abbr
 #Allowed Items = USD GBP EUR CAD AUD JPY CHF MXN BRL NZD SEK ZAR
 
-# Develoment Only
-# Load Helper Fucntions
-. .\HelperFunctions\Convert-URIArguments.ps1
-. .\HelperFunctions\Add-URIArguments.ps1
-
-#Load Needed Objects
-. .\Objects\DiscogsPaging.ps1
-. .\Objects\DiscogsArtistMember.ps1
-. .\Objects\DiscogsImage.ps1
-. .\Objects\DiscogsArtist.ps1
-
 
 function Get-DiscogsPSRelease {
     [CmdletBinding()]

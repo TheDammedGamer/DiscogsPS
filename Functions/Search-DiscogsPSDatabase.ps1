@@ -1,17 +1,6 @@
 #Database Search URL Pattern
 #https://api.discogs.com/database/search?q={query}&{?type,title,release_title,credit,artist,anv,label,genre,style,country,year,format,catno,barcode,track,submitter,contributor}
 
-# Develoment Only
-# Load Helper Fucntions
-. .\HelperFunctions\Convert-URIArguments.ps1
-. .\HelperFunctions\Add-URIArguments.ps1
-
-#Load Needed Objects
-. .\Objects\DiscogsPaging.ps1
-. .\Objects\DiscogsArtistMember.ps1
-. .\Objects\DiscogsImage.ps1
-. .\Objects\DiscogsArtist.ps1
-
 function Search-DiscogsPSDatabase {
     [CmdletBinding()]
     [OutputType([HashTable])]

@@ -23,6 +23,7 @@ class DiscogsImage {
 enum DiscogsImageType {
     Primary = 0
     Secondary = 1
+    Other = 2
 }
 
 <#

@@ -1,11 +1,6 @@
 #API Pattern
 #https://api.discogs.com/masters/{master_id}
 
-# Develoment Only
-# Load Helper Fucntions
-. .\HelperFunctions\Convert-URIArguments.ps1
-. .\HelperFunctions\Add-URIArguments.ps1
-
 function Get-DiscogsPSMaster {
     [CmdletBinding()]
     param (

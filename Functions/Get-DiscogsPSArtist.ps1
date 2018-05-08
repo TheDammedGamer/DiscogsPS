@@ -1,16 +1,5 @@
-
 #API Pattern
 #https://api.discogs.com/artists/{artist_id}
-
-#TODO: Implement $FromArtistMember
-
-#Include the relevant Objects
-#. $PSScriptRoot\Objects\DiscogsArtist.ps1
-#. $PSScriptRoot\Objects\DiscogsArtistMember.ps1
-
-# Develoment Only
-# Load Helper Fucntions
-
 
 function Get-DiscogsPSArtist {
     [CmdletBinding()]

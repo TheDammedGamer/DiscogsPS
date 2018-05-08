@@ -21,7 +21,7 @@ ModuleVersion = '0.0.1'
 GUID = 'f340a1da-666e-455a-8483-71b1e7d39570'
 
 # Author of this module
-Author = 'Liam'
+Author = 'Liam Townsend'
 
 # Company or vendor of this module
 CompanyName = 'Unknown'
@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) 2018 Liam Townsed. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'This Module is designed to help you access the Discogs APIeasily from within PowerShell'
+Description = 'This Module is designed to help you access the Discogs API easily from within PowerShell'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -70,7 +70,7 @@ ScriptsToProcess = @('Objects\Import-Objects.ps1')
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = '*'
+FunctionsToExport = '*' #@()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'

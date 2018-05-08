@@ -19,7 +19,7 @@ class DiscogsArtist {
         $JObject = $JsonIn | ConvertFrom-Json
         $this.ArtistProfile = $JObject.Profile
         $this.Name = $JObject.name
-        $this.ReleasesURL = $JObject.'releases_url'
+        $this.ReleaseURL = $JObject.'releases_url'
         $this.id = $JObject.id
         $this.DataQuality = $JObject.'data_quality'
         $this.WebURL = $JObject.uri
@@ -42,18 +42,20 @@ class DiscogsArtist {
             $type = $_.Type
             $TypeEnum = ''
             switch ($type) {
-                primary {
+                'primary' {
                     $TypeEnum = 0
                 }
-                secondary {
+                'secondary' {
                     $TypeEnum = 1
                 }
                 Default {
-                    throw "Unable to Parse Image Type, Image is of type: $type. Accountable types are 'primary', and 'secondary'"
+                    $TypeEnum = 2
+                    #Write-Warning "Unable to Parse Image Type, Image is of type: $type. Accountable types are 'primary', and 'secondary'"
                 }
             }
 
-            $obj = [DiscogsImage]::new($_.type, $_.uri, $_.height, $_.width,  $_.'resource_url', $TypeEnum, $_.uri150)
+            $obj = [DiscogsImage]::new($_.uri, $_.height, $_.width,  $_.'resource_url', $TypeEnum, $_.uri150)
+            #[string]$uri, [int]$height, [int]$width, [string]$resurl, [DiscogsImageType]$imgtype, [string]$uri150
 
             $ImagesArray += $obj
         }
