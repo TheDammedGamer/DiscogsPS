@@ -1,4 +1,4 @@
-class DiscogsPSMaster
+class DiscogsMaster
 {
     [string[]]$styles
     [string[]]$genres

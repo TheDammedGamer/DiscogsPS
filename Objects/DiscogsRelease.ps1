@@ -1,4 +1,4 @@
-class DiscogsPSRelease {
+class DiscogsRelease {
 
 }
 

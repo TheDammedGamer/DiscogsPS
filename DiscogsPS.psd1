@@ -57,7 +57,8 @@ Description = 'This Module is designed to help you access the Discogs APIeasily 
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+# - Import the relevant objects using Dot Sourcing as Import-Module doesn't work properly
+ScriptsToProcess = @('Objects\Import-Objects.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()

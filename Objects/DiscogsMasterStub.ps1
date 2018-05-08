@@ -1,4 +1,4 @@
-class DiscogsPSMasterStub {
+class DiscogsMasterStub {
     [string]$ThumbNailImageURL
     [string]$Artist
     [string]$MainRelease
