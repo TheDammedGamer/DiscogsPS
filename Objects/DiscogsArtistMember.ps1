@@ -15,6 +15,7 @@ class DiscogsArtistMember {
 
     }
 }
+New-Object -TypeName 'DiscogsArtistMember' -ArgumentList @($IsActive, $RefURL, $id, $Name)
 
 <#
 

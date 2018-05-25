@@ -26,6 +26,8 @@ enum DiscogsImageType {
     Other = 2
 }
 
+#New-Object -TypeName 'DiscogsImage' -ArgumentList @($URL, $height, $width, $resurl, $imgType, $Uri150)
+
 <#
 
 "images":  [

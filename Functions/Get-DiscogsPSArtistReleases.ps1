@@ -6,11 +6,22 @@ function Get-DiscogsPSArtistReleases {
     [OutputType([HashTable])]
     param (
         # Use Artist ID
-        [Parameter(Position=0, Mandatory=$false)][alias("ID")][int]$ArtistID,
-        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true)][DiscogsArtist]$FromArtist,
-        [Parameter(Mandatory=$false)][string]$Token,
-        [Parameter(Mandatory=$false)][ValidateSet("year", "title", "format")][string]$SortBy,
-        [Parameter(Mandatory=$false)][ValidateSet("asc", "desc")][string]$SortOrder
+        [Parameter(Position=0, Mandatory=$false)][alias("ID")]
+        [int] $ArtistID,
+
+        [Parameter(Position=0, Mandatory=$false, ValueFromPipeline=$true)]
+        [DiscogsArtist] $FromArtist,
+
+        [Parameter(Mandatory=$false)]
+        [string] $Token,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("year", "title", "format")]
+        [string] $SortBy,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("asc", "desc")]
+        [string] $SortOrder
     )
 
     begin {

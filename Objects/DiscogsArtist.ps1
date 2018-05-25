@@ -1,6 +1,12 @@
-#Load Sub Objects
-#. $PSScriptRoot\Object\DiscogsArtistMember.ps1
-#. $PSScriptRoot\Object\DiscogsImage.ps1
+
+#region begin Dev
+# Load Helper Fucntions
+. .\HelperFunctions\Convert-URIArguments.ps1
+. .\HelperFunctions\Add-URIArguments.ps1
+# Load Objects
+. .\Objects\DiscogsImage.ps1
+. .\Objects\DiscogsArtistMember.ps1
+#endregion Dev
 
 class DiscogsArtist {
     [string]$ArtistProfile
@@ -16,29 +22,25 @@ class DiscogsArtist {
 
     #Constructor
     DiscogsArtist([string]$JsonIn) {
-        $JObject = $JsonIn | ConvertFrom-Json
-        $this.ArtistProfile = $JObject.Profile
-        $this.Name = $JObject.name
-        $this.ReleaseURL = $JObject.'releases_url'
-        $this.id = $JObject.id
-        $this.DataQuality = $JObject.'data_quality'
-        $this.WebURL = $JObject.uri
-        $this.RefURL = $JObject.'resource_url'
-        $this.URLS = $JObject.urls
+        $JSON = $JsonIn | ConvertFrom-Json
+        $this.ArtistProfile = $JSON.Profile
+        $this.Name = $JSON.name
+        $this.ReleaseURL = $JSON.'releases_url'
+        $this.id = $JSON.id
+        $this.DataQuality = $JSON.'data_quality'
+        $this.WebURL = $JSON.uri
+        $this.RefURL = $JSON.'resource_url'
+        $this.URLS = $JSON.urls
 
         #Parse Member Objects
-        $MembersArray = @()
-        $JObject.members | ForEach-Object {
-            $obj = [DiscogsArtistMember]::new($_.active, $_.'resource_url', $_.id, $_.name)
-
-            $membersArray += $obj
+        $this.Members = @()
+        $JSON.members | ForEach-Object {
+            $this.Members += New-Object -TypeName 'DiscogsArtistMember' -ArgumentList @($_.active, $_.'resource_url', $_.id, $_.name)
         }
 
-        $this.Members = $MembersArray
-
         #Parse Images Objects
-        $ImagesArray = @()
-        $JObject.members | ForEach-Object {
+        $this.Images = @()
+        $JSON.members | ForEach-Object {
             $type = $_.Type
             $TypeEnum = ''
             switch ($type) {
@@ -50,25 +52,17 @@ class DiscogsArtist {
                 }
                 Default {
                     $TypeEnum = 2
-                    #Write-Warning "Unable to Parse Image Type, Image is of type: $type. Accountable types are 'primary', and 'secondary'"
                 }
             }
-
-            $obj = [DiscogsImage]::new($_.uri, $_.height, $_.width,  $_.'resource_url', $TypeEnum, $_.uri150)
-            #[string]$uri, [int]$height, [int]$width, [string]$resurl, [DiscogsImageType]$imgtype, [string]$uri150
-
-            $ImagesArray += $obj
+            $this.Images += New-Object 'DiscogsImage' -ArgumentList @($_.uri, $_.height, $_.width,  $_.'resource_url', $TypeEnum, $_.uri150)
         }
-
-        $this.Images = $ImagesArray
     }
-
     DiscogsArtist() {
-
+        #Defualt Empty Constructors
     }
 }
 
-
+#New-Object -TypeName 'DiscogsArtist' -ArgumentList @($JSONString)
 
 
 
@@ -163,6 +157,4 @@ class DiscogsArtist {
     "id":  3210013,
     "data_quality":  "Needs Vote"
 }
-
-
 #>

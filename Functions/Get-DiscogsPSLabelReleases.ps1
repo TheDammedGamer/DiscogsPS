@@ -5,14 +5,15 @@ function Get-DiscogsPSLabelReleases {
     [CmdletBinding()]
     [OutputType([HashTable[]])]
     param (
-        [Parameter(Position=0, Mandatory=$true, HelpMessage='Enter a valid Label id number.')] [alias("ID")] [int]$LabelID,
+        [Parameter(Position=0, Mandatory=$true, HelpMessage='Enter a valid Label id number.')]
+        [alias("ID")] [int] $LabelID,
 
-        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')][string]$Token
+        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')]
+        [string] $Token
     )
 
     begin {
         $URIargs = @()
-
         $uri = 'https://api.discogs.com/labels/{label_id}/releases'
         if ($LabelID -ne $null) {
             $uri = $uri.Replace('{label_id}', $LabelID.ToString())
@@ -20,7 +21,6 @@ function Get-DiscogsPSLabelReleases {
         } else {
             throw "No Label ID Specified Please specify via '-LabelID' specifiying a valid Label ID"
         }
-
         if ($token.trim() -ne '') {
             $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()
         }
@@ -28,7 +28,6 @@ function Get-DiscogsPSLabelReleases {
         $URIargs += Add-URIArgument -Key 'per_page' -Value '100'
         #Ensure we are at Page 1
         $URIargs += Add-URIArgument -Key 'page' -Value '1'
-
         $URI = Convert-URIArguments -URI $URI -URIArgs $URIargs
     }
 

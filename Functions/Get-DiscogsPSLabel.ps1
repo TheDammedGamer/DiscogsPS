@@ -1,27 +1,29 @@
 # API Format:
 # /labels/{label_id}
 
-# Develoment Only
+
+#region begin Dev
 # Load Helper Fucntions
 . .\HelperFunctions\Convert-URIArguments.ps1
 . .\HelperFunctions\Add-URIArguments.ps1
-
+# Load Objects
+. .\Objects\DiscogsArtist.ps1
+#endregion Dev
 
 function Get-DiscogsPSMaster {
     [CmdletBinding()]
     [OutputType([HashTable])]
     param (
         # Use Artist ID
-        [Parameter( Position=0, Mandatory=$true,  HelpMessage='Enter a valid label id number.' )]
-        [alias("ID")]
-        [int]$LabelID,
+        [Parameter(Position=0, Mandatory=$true, HelpMessage='Enter a valid label id number.')]
+        [alias("ID")] [int] $LabelID,
 
-        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')][string]$Token
+        [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')]
+        [string] $Token
     )
 
     begin {
         $URIargs = @()
-
         $uri = 'https://api.discogs.com/labels/{label_id}'
         if ($LabelID -ne $null) {
             $uri = $uri.Replace('{label_id}', $LabelID.ToString())
@@ -29,11 +31,9 @@ function Get-DiscogsPSMaster {
         } else {
             throw "No Label ID Specified Please specify via '-MasterID' specifiying a valid Label ID"
         }
-
         if ($token.trim() -ne '') {
             $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()
         }
-
         $URI = Convert-URIArguments -URI $URI -URIArgs $URIargs
     }
 
@@ -42,7 +42,6 @@ function Get-DiscogsPSMaster {
             $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
         }
         catch {
-            # Error Handling
             if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Label not found.' )) {
                 throw "Label not found on Discogs."
             } elseif ($resp.StatusCode -eq 404) {
@@ -54,7 +53,6 @@ function Get-DiscogsPSMaster {
     }
 
     end {
-        #return [DiscogsArtist]::new($resp.Content)
-        return $resp.Content | ConvertFrom-Josn
+        return $resp.Content | ConvertFrom-JSON
     }
 }

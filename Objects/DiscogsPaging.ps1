@@ -19,8 +19,8 @@ class DiscogsPaging {
     }
 
     # Constructor
-    DiscogsPaging([string]$JSONSTR) {
-        $JSON = $JSONSTR | ConvertFrom-Json
+    DiscogsPaging([string]$JSONIN) {
+        $JSON = $JSONIN | ConvertFrom-Json
         $This.CurrentPage = $JSON.page
         $This.TotalPages = $JSON.Pages
         $This.ItemsTotal = $JSON.items
@@ -34,6 +34,8 @@ class DiscogsPaging {
         # Default
     }
 }
+
+#New-Object -TypeName 'DiscogsPaging' -ArgumentList @($JSONString)
 
 
 <#
