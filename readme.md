@@ -117,6 +117,7 @@ Update-MarkdownHelp .\docs
     - `DiscogsImageType` Enum
 - `DiscogsArtist`
     - `DiscogsArtistMember`
+
 ---
 ## License
 
