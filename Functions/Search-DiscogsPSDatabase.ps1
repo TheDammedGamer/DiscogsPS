@@ -1,6 +1,14 @@
 #Database Search URL Pattern
 #https://api.discogs.com/database/search?q={query}&{?type,title,release_title,credit,artist,anv,label,genre,style,country,year,format,catno,barcode,track,submitter,contributor}
 
+#region begin Dev
+# Helper Functions
+. .\HelperFunctions\Convert-URIArguments.ps1
+. .\HelperFunctions\Add-URIArguments.ps1
+# Objects
+. .\Objects\DiscogsPaging.ps1
+#endregion Dev
+
 function Search-DiscogsPSDatabase {
     [CmdletBinding()]
     [OutputType([HashTable])]
@@ -87,7 +95,7 @@ function Search-DiscogsPSDatabase {
                 # Statsh the Results of the Current Page
                 $ObjectsOut += $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty results
                 # Wait for a Second to ensure we don't get Ratelimited
-                start-Sleep -Seconds 1
+                Start-Sleep -Seconds 1
             }
         } else {
             # we don't have to use paging content

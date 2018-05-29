@@ -8,17 +8,7 @@ class DiscogsPaging {
     [string]$PrevPageURL
     [string]$NextPageURL
 
-    #Methods
-    [string]GetNextPageWithToken([string]$Token) {
-        $result = $this.NextPageURL + '&Token=' + $token
-        return $result
-    }
-    [string]GetPrevPageWithToken([string]$Token) {
-        $result = $this.PrevPageURL + '&Token=' + $token
-        return $result
-    }
-
-    # Constructor
+    # ctor
     DiscogsPaging([string]$JSONIN) {
         $JSON = $JSONIN | ConvertFrom-Json
         $This.CurrentPage = $JSON.page
@@ -41,17 +31,17 @@ class DiscogsPaging {
 <#
 
 "pagination": {
-        "page": 2,
-        "pages": 30,
-        "items": 2255,
-        "per_page": 75,
-        "urls":
-            {
-                "first": "https://api.discogs.com/artists/1/releases?page=1&per_page=75",
-                "prev": "https://api.discogs.com/artists/1/releases?page=1&per_page=75",
-                "next": "https://api.discogs.com/artists/1/releases?page=3&per_page=75",
-                "last": "https://api.discogs.com/artists/1/releases?page=30&per_page=75"
-            }
+    "page": 2,
+    "pages": 30,
+    "items": 2255,
+    "per_page": 75,
+    "urls":
+        {
+            "first": "https://api.discogs.com/artists/1/releases?page=1&per_page=75",
+            "prev": "https://api.discogs.com/artists/1/releases?page=1&per_page=75",
+            "next": "https://api.discogs.com/artists/1/releases?page=3&per_page=75",
+            "last": "https://api.discogs.com/artists/1/releases?page=30&per_page=75"
+        }
     }
 
 #>
