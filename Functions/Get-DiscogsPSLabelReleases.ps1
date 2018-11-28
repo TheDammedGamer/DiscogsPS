@@ -14,9 +14,9 @@ function Get-DiscogsPSLabelReleases {
 
     begin {
         $URIargs = @()
-        $uri = 'https://api.discogs.com/labels/{label_id}/releases'
+        $URI = 'https://api.discogs.com/labels/{label_id}/releases'
         if ($LabelID -ne $null) {
-            $uri = $uri.Replace('{label_id}', $LabelID.ToString())
+            $URI = $URI.Replace('{label_id}', $LabelID.ToString())
             Write-Verbose -Message "Label ID: $LabelID"
         } else {
             throw "No Label ID Specified Please specify via '-LabelID' specifiying a valid Label ID"
@@ -88,7 +88,7 @@ function Get-DiscogsPSLabelReleases {
                 # Statsh the Results of the Current Page
                 $ObjectsOut += $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
                 # Wait for a Second to ensure we don't get Ratelimited
-                start-Sleep -Seconds 1
+                Start-Sleep -Seconds 1
             }
         } else {
             # we don't have to use paging content

@@ -25,12 +25,12 @@ function Get-DiscogsPSArtist {
 
     begin {
         $URIargs = @()
-        $uri = 'https://api.discogs.com/artists/{artist_id}'
+        $URI = 'https://api.discogs.com/artists/{artist_id}'
         if ($ArtistID -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $ArtistID.ToString())
+            $URI = $URI.Replace('{artist_id}', $ArtistID.ToString())
             Write-Verbose -Message "Artist ID: $ArtistID"
         } elseif ($FromArtistMember -ne $null) {
-            $uri = $uri.Replace('{artist_id}', $FromArtist.ID.ToString())
+            $URI = $URI.Replace('{artist_id}', $FromArtist.ID.ToString())
             $temp = $FromArtist.ID
             Write-Verbose -Message "Artist ID: $temp"
         } else {
@@ -44,7 +44,7 @@ function Get-DiscogsPSArtist {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Artist not found.' )) {

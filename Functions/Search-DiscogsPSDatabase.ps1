@@ -21,7 +21,7 @@ function Search-DiscogsPSDatabase {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/database/search'
+        $URI = 'https://api.discogs.com/database/search'
 
         if ($Query.trim() -ne $null) {
             $QueryValue = $Query.Trim().Replace(' ','%20')
@@ -41,7 +41,7 @@ function Search-DiscogsPSDatabase {
     process {
 
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if ($resp.StatusCode -eq 404) {

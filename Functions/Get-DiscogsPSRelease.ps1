@@ -17,9 +17,9 @@ function Get-DiscogsPSRelease {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/releases/{release_id}'
+        $URI = 'https://api.discogs.com/releases/{release_id}'
         if ($ReleaseID -ne $null) {
-            $uri = $uri.Replace('{release_id}', $ReleaseID.ToString())
+            $URI = $URI.Replace('{release_id}', $ReleaseID.ToString())
             Write-Verbose -Message "Release ID: $ReleaseID"
         } else {
             throw "No Release Specified Please specify via '-ReleaseID' specifiying a valid release id number "
@@ -37,7 +37,7 @@ function Get-DiscogsPSRelease {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Release not found.' )) {

@@ -14,10 +14,10 @@ function Get-DiscogsPSReleaseRating {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/releases/{release_id}/rating'
+        $URI = 'https://api.discogs.com/releases/{release_id}/rating'
 
         if ($ReleaseID -ne $null) {
-            $uri = $uri.Replace('{release_id}', $ReleaseID.ToString())
+            $URI = $URI.Replace('{release_id}', $ReleaseID.ToString())
             Write-Verbose -Message "Release ID: $ReleaseID"
         } else {
             throw "No Release ID specified, please specify via '-ReleaseID' specifiying a valid release id."
@@ -32,7 +32,7 @@ function Get-DiscogsPSReleaseRating {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if ($resp.StatusCode -eq 404) {

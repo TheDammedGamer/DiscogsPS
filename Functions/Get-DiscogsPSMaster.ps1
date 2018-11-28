@@ -19,9 +19,9 @@ function Get-DiscogsPSMaster {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/masters/{master_id}'
+        $URI = 'https://api.discogs.com/masters/{master_id}'
         if ($MasterID -ne $null) {
-            $uri = $uri.Replace('{master_id}', $MasterID.ToString())
+            $URI = $URI.Replace('{master_id}', $MasterID.ToString())
             Write-Verbose -Message "Master ID: $MasterID"
         } else {
             throw "No Master Release ID Specified Please specify via '-MasterID' specifiying a valid Master Release ID"
@@ -36,7 +36,7 @@ function Get-DiscogsPSMaster {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Master Release not found.' )) {

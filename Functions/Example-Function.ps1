@@ -16,9 +16,9 @@ function Get-DiscogsPSSomething {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/'
+        $URI = 'https://api.discogs.com/'
         if ($SomethingID -ne $null) {
-            $uri = $uri.Replace('{something_id}', $SomethingID.ToString())
+            $URI = $URI.Replace('{something_id}', $SomethingID.ToString())
             Write-Verbose -Message "something ID: $SomethingID"
         } else {
             throw "No something ID Specified Please specify via '-somethingID' specifiying a valid something ID"
@@ -33,7 +33,7 @@ function Get-DiscogsPSSomething {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             #Thow Error

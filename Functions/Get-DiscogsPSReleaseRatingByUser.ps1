@@ -2,7 +2,7 @@
 #https://api.discogs.com/releases/{release_id}/rating/{username}
 
 # Develoment Only
-# Load Helper Fucntions
+# Load Helper Functions
 #. .\HelperFunctions\Convert-URIArguments.ps1
 #. .\HelperFunctions\Add-URIArguments.ps1
 
@@ -19,17 +19,17 @@ function Get-DiscogsPSReleaseRatingByUser {
     begin {
         $URIargs = @()
 
-        $uri = 'https://api.discogs.com/releases/{release_id}/rating/{username}'
+        $URI = 'https://api.discogs.com/releases/{release_id}/rating/{username}'
 
         if ($ReleaseID -ne $null) {
-            $uri = $uri.Replace('{release_id}', $ReleaseID.ToString())
+            $URI = $URI.Replace('{release_id}', $ReleaseID.ToString())
             Write-Verbose -Message "Release ID: $ReleaseID"
         } else {
             throw "No Release ID specified, please specify via '-ReleaseID' specifiying a valid release id."
         }
 
         if ($DiscogsUsername -ne '') {
-            $uri = $uri.Replace('{username}', $DiscogsUsername.ToString())
+            $URI = $URI.Replace('{username}', $DiscogsUsername.ToString())
             Write-Verbose -Message "Discogs Username: $DiscogsUsername"
         } else {
             throw "No Discogs Username specified, please specify via '-DiscogsUsername' specifiying a valid Discogs Username."
@@ -44,7 +44,7 @@ function Get-DiscogsPSReleaseRatingByUser {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if ($resp.StatusCode -eq 404) {

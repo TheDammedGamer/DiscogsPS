@@ -63,9 +63,11 @@ Update-MarkdownHelp .\docs
 4. [ ] Write out the docs for each command
 5. [ ] Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere.
     Probably Github
-6. [ ] Add `[OutputType([<Type>])]` to All Commands
-7. [ ] Replace the C++ tyle of creating new objects `[ObjectName]::new(Arguments)` with `New-Object` commands.
+6. [ ] Add `[OutputType([<Type>])]` to all commands and create an output object for each command
+    - [ ] Get-DiscogsPSArtistReleases
+7. [ ] Replace `New-Object` commands with the C++ tyle of creating new objects `[ObjectName]::new(Arguments)`.
 8. [ ] Push to Github
+9. [ ] Compile module functions into the psm1 file.
 9. [ ] Store Token in Object for when piping objects trhough
 
 ### Commands
@@ -84,7 +86,7 @@ Update-MarkdownHelp .\docs
     3. [ ] Check For Pagination and Get All Pages
 - `Get-DiscogsPSReleaseRating`
     1. [x] ~~Add Intelligent Error handeling as per API Docs~~
-    1. [ ] Implement a DiscogsRelease object and add pipeline input
+    1. [ ] Implement a DiscogsReleaseRating object and add pipeline input
 - `Get-DiscogsPSMaster`
     1. [x] ~~Add Intelligent Error handeling as per API Docs~~
     2. [ ] Implement a DiscogsMaster Objects and return this object
@@ -109,7 +111,7 @@ Update-MarkdownHelp .\docs
     7. [ ] Add Identifers object
     8. [ ] Figure out JSON object defs for companies and series arrays and then implement them
 
-### Fully Implemented Objects
+### Implemented Objects
 - `DiscogsPaging`
 - `DiscogsTracklistItem`
     - `DiscogsTrackDuration`

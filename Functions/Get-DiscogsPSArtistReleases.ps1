@@ -33,12 +33,10 @@ function Get-DiscogsPSArtistReleases {
             Write-Verbose -Message "Artist ID: $ArtistID"
         } elseif ($FromArtist -ne $null) {
             $uri = $uri.Replace('{artist_id}', $FromArtist.id.ToString())
-            $temp = $FromArtist.id
-            Write-Verbose -Message "Artist ID: $temp"
+            Write-Verbose -Message "Artist ID: $($FromArtist.id)"
         } else {
             throw "No Artist Specified Please specify via '-ArtistID' specifiying a valid artist id number or '-FromArtist' Specifying an DiscogsArtist Object"
         }
-
 
         if ($token.trim() -ne '') {
             $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()
@@ -50,9 +48,9 @@ function Get-DiscogsPSArtistReleases {
             $URIargs += Add-URIArgument -Key 'sort_order' -Value $SortOrder.trim()
         }
 
-        #return 100 items per request
+        # return 100 items per request
         $URIargs += Add-URIArgument -Key 'per_page' -Value '100'
-        #Ensure we are at Page 1
+        # Ensure we are at Page 1
         $URIargs += Add-URIArgument -Key 'page' -Value '1'
 
         $URI = Convert-URIArguments -URI $URI -URIArgs $URIargs
@@ -75,12 +73,12 @@ function Get-DiscogsPSArtistReleases {
         }
 
         $temp = $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
-        [DiscogsPaging]$Paging = New-Object -TypeName DiscogsPaging -ArgumentList @($temp)
+        [DiscogsPaging]$Paging = [DiscogsPaging]::new($temp)
 
-        #Array Out to Store the .releases
+        # Array Out to Store the .releases
         $ObjectsOut = @()
         if ($Paging.TotalPages -gt 1) {
-            # if we have to use paging logic
+            # If we have to use paging logic
             $totalPages = $Paging.TotalPages
             $leftToGet = $totalPages - 1
             $totalItemsToGet = $Paging.ItemsTotal
@@ -113,13 +111,13 @@ function Get-DiscogsPSArtistReleases {
                 $CurrPagetemp = $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
                 $currentPage = New-Object -TypeName DiscogsPaging -ArgumentList @($CurrPagetemp)
 
-                # Statsh the Results of the Current Page
+                # Stash the Results of the Current Page
                 $ObjectsOut += $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
                 # Wait for a Second to ensure we don't get Ratelimited
                 start-Sleep -Seconds 1
             }
         } else {
-            # we don't have to use paging content
+            # We don't have to use paging content
             # Grab the FirstPage release and add them to the Array Out object
             $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
         }

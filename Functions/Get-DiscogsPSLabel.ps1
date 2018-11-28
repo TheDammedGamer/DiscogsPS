@@ -10,7 +10,7 @@
 . .\Objects\DiscogsArtist.ps1
 #endregion Dev
 
-function Get-DiscogsPSMaster {
+function Get-DiscogsPSLabel {
     [CmdletBinding()]
     [OutputType([HashTable])]
     param (
@@ -24,9 +24,9 @@ function Get-DiscogsPSMaster {
 
     begin {
         $URIargs = @()
-        $uri = 'https://api.discogs.com/labels/{label_id}'
+        $URI = 'https://api.discogs.com/labels/{label_id}'
         if ($LabelID -ne $null) {
-            $uri = $uri.Replace('{label_id}', $LabelID.ToString())
+            $URI = $URI.Replace('{label_id}', $LabelID.ToString())
             Write-Verbose -Message "Label ID: $LabelID"
         } else {
             throw "No Label ID Specified Please specify via '-MasterID' specifiying a valid Label ID"
@@ -39,7 +39,7 @@ function Get-DiscogsPSMaster {
 
     process {
         try {
-            $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET
+            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
         }
         catch {
             if (($resp.StatusCode -eq 404) -and ($($resp.Content | ConvertFrom-Json).message -eq 'Label not found.' )) {
