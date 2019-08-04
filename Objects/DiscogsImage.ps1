@@ -15,6 +15,14 @@ class DiscogsImage {
         $this.Type = $imgtype
         $this.URI150 = $uri150
     }
+    DiscogsImage ($JSONIn) {
+        $this.URL = $JSONIn.uri
+        $this.Height = $JSONIn.height
+        $this.Width = $JSONIn.width
+        $this.ResourceURL = $JSONIn.resource_url
+        $this.Type = $JSONIn.type
+        $this.URI150 = $JSONIn.uri150
+    }
     DiscogsImage () {
 
     }

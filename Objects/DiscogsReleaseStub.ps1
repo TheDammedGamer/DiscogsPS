@@ -14,9 +14,10 @@ class DiscogsReleaseStub
     [string]$ResourceURL
     [string[]]$Label
     [int]$ID
+    [DiscogsReleaseStubCommunity]$Community
 }
 
-class DiscogsStubCommunity {
+class DiscogsReleaseStubCommunity {
     [string]$Want
     [string]$Have
 }
