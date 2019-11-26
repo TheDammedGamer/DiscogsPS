@@ -1,10 +1,11 @@
+# TODO: Method To Donwload Image or Thumbnail
 class DiscogsImage {
     [string]$URL
     [int]$Height
     [int]$Width
     [string]$ResourceURL
     [DiscogsImageType]$Type
-    [string]$URI150 #ThumbNail
+    [string]$Thumbnail
 
     #Constructor
     DiscogsImage([string]$uri, [int]$height, [int]$width, [string]$resurl, [DiscogsImageType]$imgtype, [string]$uri150) {
@@ -13,7 +14,7 @@ class DiscogsImage {
         $this.Width = $width
         $this.ResourceURL = $resurl
         $this.Type = $imgtype
-        $this.URI150 = $uri150
+        $this.Thumbnail = $uri150
     }
     DiscogsImage ($JSONIn) {
         $this.URL = $JSONIn.uri
@@ -21,7 +22,7 @@ class DiscogsImage {
         $this.Width = $JSONIn.width
         $this.ResourceURL = $JSONIn.resource_url
         $this.Type = $JSONIn.type
-        $this.URI150 = $JSONIn.uri150
+        $this.Thumbnail = $JSONIn.uri150
     }
     DiscogsImage () {
 

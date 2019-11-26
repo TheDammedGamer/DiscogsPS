@@ -1,4 +1,27 @@
+# TODO: Method To Get Artist
+# TODO: Add Pipe input on Get-DiscogsPSArtist
+class DiscogsArtistRef {
+    [string]$Join
+    [string]$Name
+    [string]$ANV
+    [string]$Tracks
+    [string]$Role
+    [string]$ResourceURL
+    [int]$ID
 
+    #Constructor
+    DiscogsArtistRef([Object]$JSONIn) {
+        $this.Join = $JSONIn.join
+        $this.Name = $JSONIn.name
+        $this.ANV = $JSONIn.anv
+        $this.Tracks = $JSONIn.tracks
+        $this.Role = $JSONIn.role
+        $this.ResourceURL = $JSONIn.'resource_url'
+        $this.id = $JSONIn.id
+    }
+}
+
+#$obj = [DiscogsArtistRef]::new($JsonConverted)
 
 <#{
     "join": "",

@@ -1,7 +1,42 @@
 class DiscogsRelease {
+    [string]$Status
+    [object[]]$Series
+    [DiscogsLabelStub[]]$Labels
+    [DiscogsCommunityContribution]$Community
+    [string]$Year
+    [DiscogsImages[]]$Images
+    [int]$FormatQuality
+    [int]$Id
+    [string]$ArtistSort
+    [string[]]$Genres
+    [string]$ThumbnailURL
+    [int]$NuumberForSale
+    [string]$Title
+    [DiscogsArtistRef[]]$Artists
+    [DiscogsArtistRef[]]$ExtraArtists
+    [double]$LowestPrice
+    [string[]]$Styles
+    [string]$ReleaseDateFormated
+    [DiscogsReleaseFormat]$Formats
+    [DiscogsTracklistItem]$TrackList
+    [hashtable]$Identifiers
+    [object[]]$Companies
+    [string]$WebURL
+    [string]$Country
+    [string]$ResourceURI
+    [string]$DataQuality
+
+    [datetime]$Release # Need to Format
+    [datetime]$DateChanged
+    [datetime]$DateAdded
 
 }
 
+class DiscogsReleaseFormat {
+    [int]$Quantity
+    [string[]]$Descriptions
+    [string]$Name
+}
 
 
 <#

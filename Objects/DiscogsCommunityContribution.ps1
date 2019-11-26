@@ -1,11 +1,11 @@
 class DiscogsCommunityContribution {
-    [String]$Status # Could be Enum
+    [String]$Status
     [DiscogsRating]$Rating
     [Int32]$Want
-    [DiscogsContributor[]]$Contributors
     [Int32]$Have
+    [DiscogsContributor[]]$Contributors
     [DiscogsContributor]$Submitter
-    [String]$DataQuality # Could be Enum
+    [String]$DataQuality
     DiscogsCommunityContribution($ParsedJSON) {
         $this.Status = $ParsedJSON.Status
         $this.Rating = [DiscogsRating]::new($ParsedJSON.rating.count, $ParsedJSON.rating.average)

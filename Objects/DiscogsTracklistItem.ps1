@@ -24,10 +24,9 @@ class DiscogsTracklistItem {
         #Defualt Empty Constructor
     }
 }
+
+
 #New-Object -TypeName 'DiscogsTracklistItem' -ArgumentList @($JSONstr)
-
-
-
 
 <#
 {

@@ -1,7 +1,8 @@
 class DiscogsArtistStub {
     [string]$ThumbNailImageURL
     [string]$Title
-    [string]$URL
+    [DiscogsUserData]$UserData
+    [string]$URL #Format
     [string]$CoverImage
     [string]$ResourceURL
 
@@ -12,6 +13,7 @@ class DiscogsArtistStub {
 
 
 <#
+
 {
     "thumb":  "https://img.discogs.com/3gwtuuO2ptTavzkGFTG9-EgflwQ=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-3210013-1503324969-8384.jpeg.jpg",
     "title":  "One Ok Rock",

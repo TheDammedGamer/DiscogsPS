@@ -1,27 +1,65 @@
 class DiscogsMaster
 {
-    [string[]]$styles
-    [string[]]$genres
+    [string[]]$Styles
+    [string[]]$Genres
     [string]$ReleaseURL
-    [int]$numberForSale
-    #Videos
+    [int]$NumberForSale
+    [DiscogsVideoRef]$Videos
     [string]$Title
     [int]$ReleaseID
-    #Artists
-    [string] $WebsiteReferenceURL
-    [string]$VersionsURL
-    [double]$lowestPrice
-    [int]$year
-    [DiscogsImage[]]$images
-    [string]$APIRefernceURL
-    #tracklist
+    [DiscogsArtistRef]$Artists
+    [string]$WebURL
+    [string]$VersionsURI
+    [double]$LowestPrice
+    [int]$Year
+    [DiscogsImage[]]$Images
+    [string]$ResourceURI
+    [DiscogsTracklistItem]$Tracklist
     [int]$ID
     [string]$DataQuality
+
+    DiscogsMaster($JSONIn) {
+        $this.Styles = $JSONIn.styles
+        $this.Genres = $JSONIn.genres
+        $this.ReleaseURL = $JSONIn.main_release_url
+        $this.NumberForSale = $JSONIn.num_for_sale
+
+        $this.Videos = @()
+        $JSONIn.videos | ForEach-Object {
+            $this.Videos += [DiscogsVideoRef]::New($_)
+        }
+
+        $this.Title = $JSONIn.title
+        $this.ReleaseID = $JSONIn.main_release
+
+        $this.Artists = @()
+        $JSONIn.artists | ForEach-Object {
+            $this.Artists += [DiscogsArtistRef]::New($_)
+        }
+
+        $this.WebURL = $JSONIn.uri
+        $this.VersionsURI = $JSONIn.versions_url
+        $this.LowestPrice = $JSONIn.lowest_price
+        $this.Year = $JSONIn.year
+
+        $this.Images = @()
+        $JSONIn.images | ForEach-Object {
+            $this.Images += [DiscogsImage]::New($_)
+        }
+
+        $this.ResourceURI = $JSONIn.resource_url
+
+        $this.Tracklist = @()
+        $JSONIn.tracklist | ForEach-Object {
+            $this.Tracklist += [DiscogsTracklistItem]::New($_)
+        }
+
+        $this.Tracklist = $JSONIn.tracklist
+        $this.ID = $JSONIn.id
+        $this.DataQuality = $JSONIn.data_quality
+    }
 }
-#TODO:
-#Videos Objects
-#artist objects
-#tracklist object
+#TODO: Constructor
 
 <#
 {
