@@ -57,46 +57,45 @@ Update-MarkdownHelp .\docs
 ## Project To Do
 
 ### Module Wide
-1. [x] ~~Roll URI arguments into a Generic Functions~~
+1. [x] Roll URI arguments into a Generic Functions
 2. [ ] Add More Commands
 3. [ ] Add Examples to Readme.md
 4. [ ] Write out the docs for each command
-5. [ ] Add Help URI element to each cmdlet binding `HelpURI=<URI>,` that send the user to a the Help XML files hosted somewhere.
-    Probably Github
-6. [ ] Add `[OutputType([<Type>])]` to all commands and create an output object for each command
-    - [ ] Get-DiscogsPSArtistReleases
-7. [ ] Replace `New-Object` commands with the C++ tyle of creating new objects `[ObjectName]::new(Arguments)`.
-8. [ ] Push to Github
-9. [ ] Compile module functions into the psm1 file.
-9. [ ] Store Token in Object for when piping objects trhough
+5. [ ] Add `[OutputType([<Type>])]` to all commands and create an output object for each command
+6. [ ] Replace `New-Object` commands with the C++ tyle of creating new objects `[ObjectName]::new(Arguments)`.
+7. [ ] Push to Github
+8. [ ] Compile module functions into the psm1 file.
+9. [ ] Store Token in `$script:Var` that is set after a user manually sets the script.
+10. [ ] Add Help URI element to each cmdlet binding `HelpURI=<URI>` that send the user to a the Help XML files hosted somewhere, Probably Github
 
 ### Commands
 - `Get-DiscogsPSArtistReleases`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
-    2. [x] ~~Implement Pagination for the Results of the API Call~~
+    1. [x] Add Intelligent Error handeling as per API Docs
+    2. [x] Implement Pagination for the Results of the API Call
 - `Get-DiscogsPSArtist`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
+    1. [x] Add Intelligent Error handeling as per API Docs
 - `Get-DiscogsPSRelease`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
-    2. [x] ~~Replace the switch statements and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]` [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)~~
+    1. [x] Add Intelligent Error handeling as per API Docs
+    2. [x] Replace the switch statements and instead use a validate set attribute `[ValidateSet("Low", "Average", "High")]` [See here](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-6#validateset-attribute)
     3. [ ] Implement a DiscogsRelease object to return
 - `Search-DiscogsPSDatabase`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
-    2. [x] ~~Update this command to add URI Handling~~
+    1. [x] Add Intelligent Error handeling as per API Docs
+    2. [x] Update this command to add URI Handling
     3. [ ] Check For Pagination and Get All Pages
 - `Get-DiscogsPSReleaseRating`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
+    1. [x] Add Intelligent Error handeling as per API Docs
     1. [ ] Implement a DiscogsReleaseRating object and add pipeline input
 - `Get-DiscogsPSMaster`
-    1. [x] ~~Add Intelligent Error handeling as per API Docs~~
+    1. [x] Add Intelligent Error handeling as per API Docs
     2. [ ] Implement a DiscogsMaster Objects and return this object
 
 
 ### Objects
+- [ ] Move All objects to c# Class Lib
 - `DiscogsMaster`
     1. [ ] Add Video Ref Object `DiscogsPSVideoStub`
     2. [ ] Add Artists Ref Object
-    3. [x] ~~Add Tracklist object~~ `DiscogsTracklistItem`
+    3. [x] Add Tracklist object `DiscogsTracklistItem`
 - `DiscogsMasterStub`
     1. [ ] Add Constructor
 - `DiscogsArtistStub`

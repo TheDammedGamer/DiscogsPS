@@ -8,7 +8,7 @@
 function Get-DiscogsPSSomething {
     [CmdletBinding()]
     param (
-        [Parameter( Position=0, Mandatory=$true,  HelpMessage='Enter a valid something id number.' )] [alias("ID")] [int]$SomethingID,
+        [Parameter( Position=0, Mandatory=$true,  HelpMessage='Enter a valid something id number.' )] [Alias("id")] [int]$SomethingID,
 
         [Parameter(Position=1, Mandatory=$false, HelpMessage='Enter a valid User token from Discogs.')][string]$Token
     )

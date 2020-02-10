@@ -1,0 +1,17 @@
+# To-Do
+- [ ] Add Download-DiscogsImage
+    - Ensure it has a Pipeline input of `[DiscogsArtistMember]` and can accept a paramter of `-Thumbnail`
+    - Also add a Generic Id option
+- Convert Objects to C#
+    - [x] DiscogsArtist
+    - [x] DiscogsArtistMember
+    - [x] DiscogsArtistRef
+    - [x] DiscogsImage
+    - [x] DiscogsImageType
+    - [x] DiscogsMaster
+    - [x] DiscogsPaging
+    - [ ] DiscogsRelease
+    - [ ] DiscogsUserData
+    - [ ] DiscogsCommunityContribution
+- Change Functions to Use new c# Lib and Create Constructor `[DiscogsArtist]::Create("SomeJsonString")`
+    - [ ] Get-DiscogsArtist

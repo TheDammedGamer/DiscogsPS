@@ -43,5 +43,5 @@ class DiscogsPaging {
             "last": "https://api.discogs.com/artists/1/releases?page=30&per_page=75"
         }
     }
-
+},
 #>

@@ -12,10 +12,10 @@ function Convert-URIArguments {
         $StringToAppend = ''
         for ($i = 0; $i -lt $URIargs.Count; $i++) {
             if ($i -eq 0) {
-                #First item
+                #First Loop
                 $StringToAppend = $StringToAppend + '?' + $URIargs[$i]
             } else {
-                #Normal items
+                #Normal loop
                 $StringToAppend = $StringToAppend + '&' + $URIargs[$i]
             }
         }

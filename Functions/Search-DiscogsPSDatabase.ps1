@@ -25,7 +25,7 @@ function Search-DiscogsPSDatabase {
 
         if ($Query.trim() -ne $null) {
             $QueryValue = $Query.Trim().Replace(' ','%20')
-            $URIargs += Add-URIArgument -Key 'q' -Value $QueryValue
+            $URIargs += Add-URIArgument -Key 'query' -Value $QueryValue
         }
         if ($token.trim() -ne $null) {
             $URIargs += Add-URIArgument -Key 'token' -Value $token.trim()

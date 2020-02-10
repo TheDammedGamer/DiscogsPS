@@ -52,6 +52,6 @@ function Get-DiscogsPSRelease {
 
     end {
         #return [DiscogsArtist]::new($resp.Content)
-        return $resp.Content
+        return $resp.Content | ConvertFrom-Json
     }
 }

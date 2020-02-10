@@ -55,7 +55,7 @@ function Invoke-DiscogsPSPaging {
     )
 
     try {
-        $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET -UserAgent 'DiscogsPS/1.0 +http://github.com/thedammedgamer'
+        $resp = Invoke-WebRequest -Uri $uri -UseBasicParsing -Method GET -UserAgent 'DiscogsPS/1.0 +http://github.com/thedammedgamer' -ErrorAction Stop
     }
     catch {
         if ($resp.StatusCode -eq 404) {
@@ -84,8 +84,8 @@ function Invoke-DiscogsPSPaging {
         $totalPages = $Paging.TotalPages
         $leftToGet = $totalPages - 1
         $totalItemsToGet = $Paging.ItemsTotal
-        Write-Verbose -Message "Total items Left To Get, $totalItemsToGet From $totalPages Pages"
-        Write-Verbose -Message "Pages left to Get: $leftToGet"
+        Write-Verbose -Message "Total items left to get, $totalItemsToGet from $totalPages pages"
+        Write-Verbose -Message "Pages left to get: $leftToGet"
 
         # Stats the Resuls of the first Page
         $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty results
@@ -113,9 +113,7 @@ function Invoke-DiscogsPSPaging {
         }
     } else {
         # we don't have to use paging content
-        # Grab the FirstPage release and add them to the Array Out object
-        $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
+        $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty results
     }
-
-
+    Write-Output $ObjectsOut
 }
