@@ -54,9 +54,9 @@ Import-Module .\DiscogsPS.psd1 -Force
 Update-MarkdownHelp .\docs
 ```
 
-## [Project To Do](\Todo.md)
+## [Project To Do](Todo.md)
 
-## [Change Log](\ChangeLog.md)
+## [Change Log](ChangeLog.md)
 
 
 ## License
