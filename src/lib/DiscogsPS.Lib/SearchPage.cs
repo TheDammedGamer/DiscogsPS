@@ -6,18 +6,18 @@ using System.Text.Json.Serialization;
 
 namespace DiscogsPS.Lib
 {
-    public class ArtistReleasesPage
+    public class SearchPage
     {
         public Paging Pagination { get; set; }
         public List<object> Results { get; set; }
 
-        private ArtistReleasesPage()
+        private SearchPage()
         {
 
         }
-        public static ArtistReleasesPage Parse(string jsonIn)
+        public static SearchPage Parse(string jsonIn)
         {
-            var page = new ArtistReleasesPage();
+            var page = new SearchPage();
             page.Results = new List<object>();
             var obj = JsonDocument.Parse(jsonIn).RootElement;
 
