@@ -149,23 +149,3 @@ function Search-DiscogsPSDatabase {
         return $ObjectsOut
     }
 }
-
-
-
-
-function Search-DiscogsPSDatabaseAdvanced {
-    [CmdletBinding()]
-    param (
-        # Parameter help description
-        [Parameter(Position = 0, Mandatory = $false)][string]$Query
-    )
-
-    begin {
-    }
-
-    process {
-    }
-
-    end {
-    }
-}

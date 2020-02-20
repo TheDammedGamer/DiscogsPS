@@ -15,11 +15,33 @@ namespace DiscogsPS.Lib
         public string ThumbnailURL {get; private set;}
         // community
         // companies - List of Labels
+        public List<CompanyRef> Companies {get; set;}
         public string Country {get; set;}
         public DateTime DateAdded {get; set;}
         public DateTime DateChanged {get; set;}
         public int EstimatedWeight {get; set;}
         public List<ArtistRef> ExtraArtists {get; set;}
+        public int FormatQuality {get; set;}
+        // formats - List of Avaliable Formats
+        public List<string> Genres {get; set;}
+        // Identifiers - List of identifiers
+        public List<Image> Images {get; set;}
+        public List<LabelRef> Labels {get; set;}
+        public Double ListPrice {get; set;}
+        public int MasterId {get; private set;}
+        public string MasterURI {get; private set;}
+        public string Notes {get; set;}
+        public int NumberForSale {get; set;}
+        public string Released {get; set;}
+        public string ReleasedFormatted {get; set;}
+        public string ResourceURI { get; private set; }
+        //series - an array of some type
+        public string Status {get; set;}
+        public List<string> Styles {get; set;}
+        public List<TrackListItem> TrackList {get; set;}
+        public string WebURL {get; set;}
+        public List<VideoRef> Videos {get; set;}
+        public int Year {get; set;}
     }
 }
 

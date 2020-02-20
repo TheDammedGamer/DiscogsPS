@@ -6,7 +6,7 @@ function Invoke-DiscogsPaging {
     )
 
     begin {
-        $UA = 'DiscogsPS/1.0 +http://github.com/thedammedgamer'
+        $UA = 'DiscogsPS/1.0 +https://github.com/TheDammedGamer/DiscogsPS'
 
         $ObjectsOut = [System.Collections.Generic.List[Object]]::new()
 
@@ -42,6 +42,8 @@ function Invoke-DiscogsPaging {
             Write-Verbose -Message "Total items Left To Get: $($Paging.ItemsTotal)"
             Write-Verbose -Message "Getting $($Paging.TotalPages) Pages"
             Write-Verbose -Message "Pages left to Get: $($Paging.TotalPages - 1)"
+
+            Start-Sleep -Seconds 1 # Wait for a Second to ensure we don't get Ratelimited
 
             # Stats the Resuls of the first Page
             $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases

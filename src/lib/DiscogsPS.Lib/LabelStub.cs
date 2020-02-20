@@ -8,15 +8,19 @@ namespace DiscogsPS.Lib
 {
     public class LabelStub
     {
-        public string Name;
-        public string CatNo;
-        public string ResourceURI {get; private set;}
-        public int Id {get; private set;}
+        public string Name {get; set;}
+        public string CatalogNo { get; set; }
+        public string ResourceURI { get; private set; }
+        public int Id { get; private set; }
+        public string EntityType { get; set; }
+        public string EntityTypeName { get; set; }
 
-        private LabelStub() {
+        private LabelStub()
+        {
 
         }
-        public static LabelStub Parse(JsonElement element) {
+        public static LabelStub Parse(JsonElement element)
+        {
             var item = new LabelStub();
             foreach (var obj in element.EnumerateObject())
             {
@@ -32,11 +36,16 @@ namespace DiscogsPS.Lib
                         item.ResourceURI = obj.Value.GetString();
                         break;
                     case "catno":
-                        item.CatNo = obj.Value.GetString();
+                        item.CatalogNo = obj.Value.GetString();
+                        break;
+
+                    case "entity_type_name":
+                        item.EntityTypeName = obj.Value.GetString();
+                        break;
+                    case "entity_type":
+                        item.EntityType = obj.Value.GetString();
                         break;
                     case "type":
-                    case "entity_type_name":
-                    case "entity_type":
                         //Don't Care
                         break;
                     default:
