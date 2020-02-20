@@ -57,11 +57,11 @@ namespace DiscogsPS.Lib
 }
 
 /*
- * "join": "&",
- * "name": "Tony Sheridan",
- * "anv": "",
- "tracks": "",
- "role": "",
- "resource_url": "https://api.discogs.com/artists/261052",
- id": 261052
+"join": "&",
+"name": "Tony Sheridan",
+"anv": "",
+"tracks": "",
+"role": "",
+"resource_url": "https://api.discogs.com/artists/261052",
+"id": 261052
  */

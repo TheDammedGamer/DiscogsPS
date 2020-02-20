@@ -6,9 +6,52 @@ function Search-DiscogsPSDatabase {
     [CmdletBinding()]
     [OutputType([HashTable])]
     param (
-        # Parameter help description
-        [Parameter(Position=0, Mandatory=$true)][string]$Query,
-        [Parameter(Position=1, Mandatory=$true)][string]$Token
+        [Parameter(Mandatory = $true, ParameterSetName = "Simple", HelpMessage = "Your search query")]
+        [string]$SimpleQuery,
+
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Your search query")]
+        [string]$Query,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Simple")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Complex")]
+        [string]$Token,
+
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Filter by result type.")]
+        [ValidateSet("release", "master", "artist", "label")]
+        [string]$Type, # 'type'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search by combined 'Artist Name - Release Title' title field.")]
+        [string]$Title, # 'title'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search release titles.")]
+        [string]$ReleaseTitle, # 'release_title'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search release credits.")]
+        [string]$Credit, # 'credit'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search artist names.")]
+        [string]$Artist, # 'artist'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search artist ANV.")]
+        [string]$ANV, # 'anv'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search label names.")]
+        [string]$Label, # 'label'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search genres.")]
+        [string]$Genre, # 'genre'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search styles.")]
+        [string]$Style, # 'style'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search release country.")]
+        [string]$Country, # 'country'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search release year.")]
+        [int]$Year, # 'year'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search formats.")]
+        [string]$Format, # 'format'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search catalog number.")]
+        [string]$CatalogNo, # 'catno'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search barcodes.")]
+        [string]$Barcode, # 'barcode'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search track titles.")]
+        [string]$Track, # 'track'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search submitter username.")]
+        [string]$Submitter, # 'submitter'
+        [Parameter(Mandatory = $false, ParameterSetName = "Complex", HelpMessage = "Search contributor usernames.")]
+        [string]$Contributor # 'contributor'
+
     )
 
     begin {
@@ -16,10 +59,77 @@ function Search-DiscogsPSDatabase {
 
         $URIBase = 'https://api.discogs.com/database/search'
 
-        $URIargs += Add-URIArgument -Key 'query' -Value $Query
-        $URIargs += Add-URIArgument -Key 'token' -Value $tokens
+        if ($PSCmdlet.ParameterSetName -eq "Simple") {
+            $URIargs += Add-URIArgument -Key 'query' -Value $SimpleQuery
+            $URIargs += Add-URIArgument -Key 'token' -Value $Token
+        } elseif ($PSCmdlet.ParameterSetName -eq "Complex") {
+            if ($PSBoundParameters.Keys.Count -lt 2) {
+                Write-Error -Message "Unable to search without a user Token and another parameter."
+            }
+            $PSBoundParameters.Keys | ForEach-Object {
+                switch ($_) {
+                    'Query' {
+                        $URIargs += Add-URIArgument -Key 'query' -Value $query
+                    }
+                    'Token' {
+                        $URIargs += Add-URIArgument -Key 'token' -Value $Token
+                    }
+                    'Type' {
+                        $URIargs += Add-URIArgument -Key 'type' -Value $Type
+                    }
+                    'Title' {
+                        $URIargs += Add-URIArgument -Key 'title' -Value $Title
+                    }
+                    'ReleaseTitle' {
+                        $URIargs += Add-URIArgument -Key 'release_title' -Value $ReleaseTitle
+                    }
+                    'Credit' {
+                        $URIargs += Add-URIArgument -Key 'credit' -Value $Credit
+                    }
+                    'Artist' {
+                        $URIargs += Add-URIArgument -Key 'artist' -Value $Artist
+                    }
+                    'ANV' {
+                        $URIargs += Add-URIArgument -Key 'anv' -Value $ANV
+                    }
+                    'Label' {
+                        $URIargs += Add-URIArgument -Key 'label' -Value $Label
+                    }
+                    'Genre' {
+                        $URIargs += Add-URIArgument -Key 'genre' -Value $Genre
+                    }
+                    'Style' {
+                        $URIargs += Add-URIArgument -Key 'style' -Value $Style
+                    }
+                    'Country' {
+                        $URIargs += Add-URIArgument -Key 'country' -Value $Country
+                    }
+                    'Year' {
+                        $URIargs += Add-URIArgument -Key 'year' -Value $Year
+                    }
+                    'Format' {
+                        $URIargs += Add-URIArgument -Key 'format' -Value $Format
+                    }
+                    'CatalogNo' {
+                        $URIargs += Add-URIArgument -Key 'catno' -Value $CatalogNo
+                    }
+                    'Barcode' {
+                        $URIargs += Add-URIArgument -Key 'barcode' -Value $Barcode
+                    }
+                    'Track' {
+                        $URIargs += Add-URIArgument -Key 'track' -Value $Track
+                    }
+                    'Submitter' {
+                        $URIargs += Add-URIArgument -Key 'submitter' -Value $Submitter
+                    }
+                    'Contributor' {
+                        $URIargs += Add-URIArgument -Key 'contributor' -Value $Contributor
+                    }
+                }
+            }
+        }
 
-        # PAgination Params
+        # Pagination Params
         $URIargs += Add-URIArgument -Key 'per_page' -Value '100'
         $URIargs += Add-URIArgument -Key 'page' -Value '1'
 
@@ -27,81 +137,27 @@ function Search-DiscogsPSDatabase {
     }
 
     process {
+        $ErrorList = [System.Collections.Generic.List[DiscogsPS.Lib.APIError]]::new()
+        $ErrorList.Add([DiscogsPS.Lib.APIError]::SimpleError(404, "Error 404 from Discogs API Check Connection to https://api.discogs.com"))
+        $ErrorList.Add([DiscogsPS.Lib.APIError]::ComplexError(500, "Query Timeout. Please try again with a simpler query.", "Query time exceeded. Please try a simpler query."))
+        $ErrorList.Add([DiscogsPS.Lib.APIError]::ComplexError(500, "Internal Server Error, Psosible Malformed Query.", "An internal server error occurred. (Malformed query?)"))
 
-        try {
-            $resp = Invoke-WebRequest -Uri $URI -UseBasicParsing -Method GET
-        }
-        catch {
-            if ($resp.StatusCode -eq 404) {
-                throw "Error 404 from Discogs API Check Connection to https://api.discogs.com"
-            } elseif ($resp.StatusCode -eq 404) {
-                # 500 relates to internal server errors
-                $jsonres =  $resp.Content | ConvertFrom-Json
-                if ($jsonres.message -eq 'Query time exceeded. Please try a simpler query.') {
-                    throw 'Query timeout. Please try a simpler query.'
-                } elseif ($jsonres.message -eq 'An internal server error occurred. (Malformed query?)') {
-                    throw 'Internal Server Error. Possible malformed query.'
-                } else {
-                    throw $_
-                }
-            } else {
-                throw $_
-            }
-        }
-        $temp = $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
-        [DiscogsPaging]$Paging = New-Object -TypeName DiscogsPaging -ArgumentList @($temp)
-
-        #Array Out to Store the .releases
-        $ObjectsOut = @()
-        if ($Paging.TotalPages -gt 1) {
-            # if we have to use paging logic
-            $totalPages = $Paging.TotalPages
-            $leftToGet = $totalPages - 1
-            $totalItemsToGet = $Paging.ItemsTotal
-            Write-Verbose -Message "Total items Left To Get, $totalItemsToGet From $totalPages Pages"
-            Write-Verbose -Message "Pages left to Get: $leftToGet"
-
-            # Stats the Resuls of the first Page
-            $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty results
-
-            [DiscogsPaging]$currentPage = $Paging
-            for ($page = 1; $page -lt $Paging.TotalPages; $page++) {
-                # Iterate through Each Page
-                $actPage = $page + 1
-                Write-Verbose -Message "Getting Page: $actPage"
-                $nextURI = $currentPage.NextPageURL
-                try {
-                    $PageResp = Invoke-WebRequest -Uri $nextURI -UseBasicParsing -Method GET
-                }
-                catch {
-                    # Thow Error
-                    throw $_
-                }
-                $CurrPagetemp = $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty pagination | ConvertTo-Json
-                $currentPage = New-Object -TypeName DiscogsPaging -ArgumentList @($CurrPagetemp)
-
-                # Statsh the Results of the Current Page
-                $ObjectsOut += $PageResp.Content | ConvertFrom-Json | Select-Object -ExpandProperty results
-                # Wait for a Second to ensure we don't get Ratelimited
-                Start-Sleep -Seconds 1
-            }
-        } else {
-            # we don't have to use paging content
-            # Grab the FirstPage release and add them to the Array Out object
-            $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
-        }
+        $ObjectsOut = Invoke-DiscogsPaging -IntialURI $URI -PossibleErrors $ErrorList
     }
 
     end {
-        $out = $ObjectsOut
-        return $out
+        return $ObjectsOut
     }
 }
+
+
+
+
 function Search-DiscogsPSDatabaseAdvanced {
     [CmdletBinding()]
     param (
         # Parameter help description
-        [Parameter(Position=0, Mandatory=$false)][string]$Query
+        [Parameter(Position = 0, Mandatory = $false)][string]$Query
     )
 
     begin {

@@ -46,7 +46,7 @@ function Invoke-DiscogsPaging {
             # Stats the Resuls of the first Page
             $ObjectsOut += $resp.Content | ConvertFrom-Json | Select-Object -ExpandProperty releases
 
-            [DiscogsPaging]$currentPage = $Paging
+            [DiscogsPS.Lib.Paging]$currentPage = $Paging
             for ($page = 2; $page -lt $Paging.TotalPages; $page++) {
                 Write-Progress -Activity "Getting Pages" -Status "Progress:" -PercentComplete ($page/$Paging.TotalPages*100) -CurrentOperation "Getting Page: $page/$($Paging.TotalPages)"
 
@@ -54,7 +54,7 @@ function Invoke-DiscogsPaging {
                 try {
                     Write-Verbose -Message "Getting URL: $($currentPage.NextPageURI)"
                     $PageResp = Invoke-WebRequest -Uri $currentPage.NextPageURI -UseBasicParsing -Method GET -UserAgent $UA
-                    $PageItem = [DiscogsPS.Lib.ArtistReleasesPage]::Parse($PageResp.Content)
+                    $PageItem = [DiscogsPS.Lib.SearchPage]::Parse($PageResp.Content)
                     $currentPage = $PageItem.Pagination
                     $ObjectsOut.AddRange($PageItem.Releases)
                 } catch {

@@ -42,8 +42,11 @@ namespace DiscogsPS.Lib
                                         page.Results.Add(MasterStub.Parse(releaseObj));
                                         break;
                                     case "artist":
+                                        page.Results.Add(ArtistStub.Parse(releaseObj));
+                                        break;
                                     case "label":
-                                        throw new NotImplementedException();
+                                        page.Results.Add(LabelStub.Parse(releaseObj));
+                                        break;
                                     default:
                                         throw new Exception(String.Format("Unknown Object Type when parsing Artist Releases page: {0}", releaseItem.Name));
                                 }
